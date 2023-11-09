@@ -1,0 +1,15 @@
+header-section{
+    position: relative;
+    display: flex;
+    top: 52px;
+    border: 1px solid blue;
+    padding: 50px 20px;
+}
+
+@media (min-width: 768px){
+
+    header-section{
+        top: 63px;
+    }
+
+}
