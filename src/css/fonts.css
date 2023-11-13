@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Poppins';
+
+    src: url("../fonts/Poppins/Poppins-Regular.ttf") format("truetype"),
+         url("../fonts/Poppins/Poppins-ExtraBold.ttf") format("truetype"),
+         url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+         
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+h1 {
+    font-family: "Poppins-ExtraBold", sans-serif;
+}
