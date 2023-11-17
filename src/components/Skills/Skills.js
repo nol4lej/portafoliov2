@@ -12,6 +12,8 @@ class SkillsSection extends HTMLElement{
     
     connectedCallback(){
         this.render()
+        this.openSkill()
+        this.handleSlider()
     }
 
     render(){
@@ -19,34 +21,14 @@ class SkillsSection extends HTMLElement{
             <nav class="navtab__types__container">
                 <ul id="typeList">
                     ${this.getTypes().map(t => `
-                        <li id="${t}" role="button" data-type-list>${t}</li>
+                        <li id="${t}" role="button" data-type-list><p>${t}</p></li>
                     `).join("")}
                 </ul>
                 <i class="material-icons" role="button" id="prev-btn">chevron_left</i>
                 <i class="material-icons" role="button" id="next-btn">chevron_right</i>
             </nav>
-            <section class="navtab__content__container">
-                <article id="navtab-content"></article>
-            </section>
+            <section id="navtab-content" class="navtab__content__container"></section>
         `
-        this.openSkill()
-        this.handleSlider()
-    }
-
-    openSkill() {
-        const buttons = this.querySelectorAll("li[data-type-list]");
-      
-        buttons.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                buttons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                this.renderContent(btn.id);
-                this.currentIndex = index;
-            });
-        });
-      
-        // Llama a renderContent con el tipo actual al cargar la página
-        this.renderContent(buttons[this.currentIndex].id);
     }
 
     getTypes(){
@@ -54,64 +36,91 @@ class SkillsSection extends HTMLElement{
         return types
     }
 
-    getCurrentIndex() {
-        return this.currentIndex;
-      }
+    openSkill() {
+        const buttons = this.querySelectorAll("li[data-type-list]");
 
+        buttons.forEach((btn, index) => {
+            buttons[0].querySelector("p").classList.add("active");
+            btn.addEventListener("click", () => {
+                buttons.forEach(b => b.id === btn.id ? btn.querySelector("p").classList.add("active") : b.querySelector("p").classList.remove("active"));
+                this.renderContent(btn.id);
+                this.currentIndex = index;
+            });
+        });        
+      
+        // Llama a renderContent con el tipo actual al cargar la página
+        this.renderContent(buttons[this.currentIndex].id);
+    }
 
     renderContent(id){
         const container = this.querySelector("#navtab-content")
         container.innerHTML = `
-            ${this.skills[id].map(skill => `
-                <figure>
-                    <img src="${skill.img}">
-                    <p>${skill.title}</p>
-                </figure>
-            `).join("")}
+            <p>${this.skills[id].text}</p>
+            <div class="navtab__content__figure__container">
+                ${this.skills[id].detail.map(skill => `
+                    <figure>
+                        <img src="${skill.img}">
+                        <p>${skill.title}</p>
+                    </figure>
+                `).join("")}
+            </div>
         `
     }
 
     handleSlider() {
-        const slidesContainer = document.getElementById("typeList");
-        const slide = document.querySelector("li[data-type-list]");
-        const prevButton = document.getElementById("prev-btn");
-        const nextButton = document.getElementById("next-btn");
+        const slidesContainer = this.querySelector("#typeList");
+        const slide = this.querySelector("li[data-type-list]");
+        const prevButton = this.querySelector("#prev-btn");
+        const nextButton = this.querySelector("#next-btn");
       
         const recalculateSizes = () => {
-            const slideWidth = slide.clientWidth + 10; // Considera el espacio entre elementos
-            const containerWidth = slidesContainer.clientWidth;
-            const initialScroll = Math.floor((slideWidth / 2) - (containerWidth / 2));
+            const slideWidth = slide.clientWidth // obtengo el ancho de cada slide
+            const containerWidth = slidesContainer.clientWidth; //  obtengo el ancho del contenedor de los slides
+            const initialScroll = Math.floor((slideWidth / 2) - (containerWidth / 2)); // calcula cuanto debe desplazarse el contenido del contenedo
         
             slidesContainer.scrollLeft = initialScroll;
+            this.renderContent(this.currentIndex); // cuando se ejecuta el evento resize, mantengo el contenido del navtab seleccionado
         };
       
         // Recalcular los tamaños al cargar la página y al cambiar el tamaño de la ventana
         window.addEventListener('load', recalculateSizes);
         window.addEventListener('resize', recalculateSizes);
+        
+        const updateActiveButton = () => {
+            // Añade la clase "active" al botón correspondiente
+            const buttons = this.querySelectorAll("li[data-type-list]");
+            buttons.forEach((btn, index) => {
+                btn.querySelector("p").classList.toggle("active", index === this.currentIndex);
+            });
+            
+        };
       
         nextButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex + 1) % this.getTypes().length;
             this.renderContent(this.getTypes()[this.currentIndex]);
-            slidesContainer.scrollLeft += slide.clientWidth + 10; // Considera el espacio entre elementos
         
-            // Verifica si estás en el último slide y vuelve al primer slide
-            if (this.currentIndex === 0) {
-              // Ajusta el desplazamiento al principio del contenedor
-              slidesContainer.scrollLeft = 0;
-            }
+            // Obtiene el slide actual
+            const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
+            
+            // Hace que el slide actual esté centrado en el contenedor
+            currentSlide.scrollIntoView({ behavior: "smooth", block: "center" });
+        
+            updateActiveButton();
         });
-      
+        
         prevButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex - 1 + this.getTypes().length) % this.getTypes().length;
             this.renderContent(this.getTypes()[this.currentIndex]);
-            slidesContainer.scrollLeft -= slide.clientWidth + 10; // Considera el espacio entre elementos
         
-            // Verifica si estás en el primer slide y vuelve al último slide
-            if (this.currentIndex === this.getTypes().length - 1) {
-              // Ajusta el desplazamiento al final del contenedor
-              slidesContainer.scrollLeft = slidesContainer.scrollWidth;
-            }
+            // Obtiene el slide actual
+            const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
+            
+            // Hace que el slide actual esté centrado en el contenedor
+            currentSlide.scrollIntoView({ behavior: "smooth", block: "center" });
+        
+            updateActiveButton();
         });
+        
     }
       
     

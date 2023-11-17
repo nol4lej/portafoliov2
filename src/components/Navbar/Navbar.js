@@ -2,6 +2,7 @@ class Navbar extends HTMLElement{
 
     connectedCallback(){
         this.render()
+        this.handleHeight()
     }
 
     render(){
@@ -36,8 +37,14 @@ class Navbar extends HTMLElement{
     }
 
     handleButton(){
-        document.getElementById("nav-btn").addEventListener("click", () => {
-            document.getElementById("nav-toggler-content").classList.toggle("show")
+        this.querySelector("#nav-btn").addEventListener("click", () => {
+            this.querySelector("#nav-toggler-content").classList.toggle("show")
+        })
+    }
+
+    handleHeight(){
+        window.addEventListener("scroll", () => {
+            this.classList.toggle("active", window.scrollY > 50);
         })
     }
 

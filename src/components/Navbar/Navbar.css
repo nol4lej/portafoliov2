@@ -4,7 +4,14 @@ nav-bar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    background-color: var(--primary-blue);
+    height: 80px;
+    transition: height .3s ease-in-out;
+}
+
+nav-bar.active{
+    height: 50px;
 }
 
 /* BUTTON */ /* BUTTON */
