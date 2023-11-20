@@ -46,6 +46,7 @@ nav-bar.active{
     overflow: hidden;
     transition: max-height .3s ease-in-out;
     /* border: 1px solid blue; */
+    background-color: var(--primary-blue);
 }
 
 .navbar__content__container > ul{

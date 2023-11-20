@@ -55,14 +55,16 @@ class SkillsSection extends HTMLElement{
     renderContent(id){
         const container = this.querySelector("#navtab-content")
         container.innerHTML = `
-            <p>${this.skills[id].text}</p>
-            <div class="navtab__content__figure__container">
-                ${this.skills[id].detail.map(skill => `
-                    <figure>
-                        <img src="${skill.img}">
-                        <p>${skill.title}</p>
-                    </figure>
-                `).join("")}
+            <div class="fade-in">
+                <p>${this.skills[id].text}</p>
+                <div class="navtab__content__figure__container ">
+                    ${this.skills[id].detail.map(skill => `
+                        <figure>
+                            <img src="${skill.img}">
+                            <p>${skill.title}</p>
+                        </figure>
+                    `).join("")}
+                </div>
             </div>
         `
     }
