@@ -15,7 +15,7 @@ class Navbar extends HTMLElement{
             </div>
 
             <div class="navbar__logo__container">
-                <p>NM</p>
+                <p>Nolasco Medina</p>
             </div>
 
             <div class="navbar__content__container" id="nav-toggler-content">
@@ -44,7 +44,9 @@ class Navbar extends HTMLElement{
 
     handleHeight(){
         window.addEventListener("scroll", () => {
-            this.classList.toggle("active", window.scrollY > 50);
+            const isScrolled = window.scrollY > 50
+            this.classList.toggle("active", isScrolled);
+            this.querySelector("#nav-toggler-content").classList.toggle("active", isScrolled)
         })
     }
 
