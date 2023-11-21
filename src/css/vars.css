@@ -1,5 +1,15 @@
 :root{
-    --principal-bg: #FFFFFF;
+    --principal-bg: black;
+    /* --principal-bg: #0a090d; */
 
-    --primary-blue: #001F3F;
+    --color-purple: rgba(117,60,216,.8);
+    --text-white: #fff;
+    --text-grey: #adabb2;
+    --text-size-medium: 1.25rem;
+
+    --border-gray: #67666e;
+
+    --btn-hover-grey: rgba(255, 255, 255, 0.137);
+    --container-bg-grey: rgba(255,255,255,.08);
+    --container-border-grey: rgba(255,255,255,.12);
 }

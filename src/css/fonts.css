@@ -13,6 +13,7 @@ body{
     font-family: "Poppins", sans-serif;
 }
 
-h1 {
+h1, h2 {
     font-family: "Poppins-ExtraBold", sans-serif;
+    color: var(--text-white);
 }

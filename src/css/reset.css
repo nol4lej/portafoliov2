@@ -7,3 +7,14 @@ p, ul {
     padding: 0;
 }
 
+a{
+    text-decoration: none;
+    color: var(--text-white);
+}
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+

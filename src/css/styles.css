@@ -6,6 +6,7 @@
 @import url("../components/Navbar/Navbar.css");
 @import url("../components/Header/Header.css");
 @import url("../components/Skills/Skills.css");
+@import url("../components/Projects/Prpjects.css");
 
 body{
     background-color: var(--principal-bg);
