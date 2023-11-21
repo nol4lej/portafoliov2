@@ -1,15 +1,22 @@
 skills-section{
+    display: grid;
+}
+
+skills-section > h2{
+    text-align: center;
+}
+
+.skills__content__container{
     display: flex;
     flex-direction: column;
 }
 
 .navtab__types__container{
     display: flex;
-    border: 1px solid red;
-    /* padding: 16px 12px; */
-
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--container-border-grey);
+    height: 100%;
 }
 
 #typeList{
@@ -27,13 +34,17 @@ skills-section{
     top: 0;
     bottom: 0;
     margin: auto;
-    background-color: white;
+    background-color: var(--container-bg-grey);
     border: none;
     font-size: 3rem;
     padding: 0;
     cursor: pointer;
-    opacity: 0.5;
     transition: opacity 100ms;
+    color: var(--text-white);
+}
+
+#prev-btn:hover, #next-btn:hover{
+    background-color: var(--btn-hover-grey);
 }
 
 #prev-btn{
@@ -54,7 +65,6 @@ skills-section{
     justify-content: center;
     width: 100%;
     flex: 1 0 100%;
-    /* padding: 16px 12px; */
 }
 
 #typeList > li > p {
@@ -63,15 +73,16 @@ skills-section{
     justify-content: center;
     width: 50%;
     height: 50px;
-    border: 1px solid red;
+    color: var(--text-grey);
     border-radius: 5px 5px 0 0;
 }
 
 /*  */
 
 #typeList > li > p.active {
-    color: red;
-    background-color: gray;
+    color: var(--text-white);
+    background-color: var(--container-bg-grey);
+    border: 1px solid var(--container-border-grey);
 }
 
 /*  */
@@ -81,18 +92,28 @@ skills-section{
     gap: 10px;
     height: 100%;
     padding: 20px;
-    background-color: gray;
+    background-color: var(--container-bg-grey);
+    border: 1px solid var(--container-border-grey);
+    border-radius: 0 5px 5px 0;
+    color: var(--text-grey);
 }
 
 .navtab__content__figure__container{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly
 }
 
 .navtab__content__figure__container > figure{
-    display: grid;
+    display: flex;
     justify-items: center;
-    height: 90px;
-    border: 1px solid red;
+    gap: 5px;
+    justify-content: space-around;
+    /* height: 90px; */
+    width: 50px;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .navtab__content__figure__container > figure > img{
@@ -100,17 +121,26 @@ skills-section{
     height: 50px;
 }
 
+.navtab__content__figure__container > figure > p{
+    white-space: nowrap;
+    text-align: center;
+}
+
+
 @media (min-width: 768px) {
     
     skills-section{
-        flex-direction: row;
-        align-items: flex-start;
         padding: 60px;
+    }
+
+    .skills__content__container{
+        flex-direction: row;
     }
 
     .navtab__types__container{
         width: 30%;
         overflow: visible;
+        height: max-content;
     }
 
     .navtab__types__container > ul{

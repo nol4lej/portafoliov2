@@ -18,16 +18,19 @@ class SkillsSection extends HTMLElement{
 
     render(){
         this.innerHTML = `
-            <nav class="navtab__types__container">
-                <ul id="typeList">
-                    ${this.getTypes().map(t => `
-                        <li id="${t}" role="button" data-type-list><p>${t}</p></li>
-                    `).join("")}
-                </ul>
-                <i class="material-icons" role="button" id="prev-btn">chevron_left</i>
-                <i class="material-icons" role="button" id="next-btn">chevron_right</i>
-            </nav>
-            <section id="navtab-content" class="navtab__content__container"></section>
+            <h2>Tecnologías y habilidades</h2>
+            <div class="skills__content__container">
+                <nav class="navtab__types__container">
+                    <ul id="typeList">
+                        ${this.getTypes().map(t => `
+                            <li id="${t}" role="button" data-type-list><p>${t}</p></li>
+                        `).join("")}
+                    </ul>
+                    <i class="material-icons" role="button" id="prev-btn">chevron_left</i>
+                    <i class="material-icons" role="button" id="next-btn">chevron_right</i>
+                </nav>
+                <section id="navtab-content" class="navtab__content__container"></section>
+            </div>
         `
     }
 
