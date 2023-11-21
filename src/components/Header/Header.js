@@ -9,7 +9,6 @@ class HeaderSection extends HTMLElement{
     render(){
         this.innerHTML = `
             ${this.text()}
-            ${this.image()}
         `
     }
 

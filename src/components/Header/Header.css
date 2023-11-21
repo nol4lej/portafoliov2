@@ -6,7 +6,12 @@ header-section{
     align-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 52px 20px;    
+    padding: 120px 20px;    
+    background-image: url("../../assets/gifbf.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: padding .3s ease-in-out;
 }
 
 /* TEXT CONTAINER */ /* TEXT CONTAINER */
@@ -22,6 +27,8 @@ header-section{
 
 .text__container > p{
     padding: 0 30px;
+    font-size: var(--text-size-medium);
+    color: var(--text-grey);
 }
 
 .links__container {
@@ -34,15 +41,27 @@ header-section{
 .links__container > a{
     display: flex;
     align-items: center;
-    gap: 5px;
-    border: 1px solid red;
+    justify-content: space-around;
+    gap: 12px;
     padding: 8px 16px;
     width: 100px;
     border-radius: 6px;
+    background-color: var(--container-bg-grey);
+    border: 1px solid var(--container-border-grey);
+}
+
+.links__container > a:hover{
+    background-color: var(--btn-hover-grey);
 }
 
 .links__container > a > svg{
     width: 25px;
+    color: var(--color-purple);
+    transition: all .3s ease-in-out;
+}
+
+.links__container > a:hover svg{
+    transform: translateX(3px);
 }
 
 .header__text__container > div:last-child {
@@ -68,7 +87,7 @@ header-section{
 
     header-section{
         flex-direction: row;
-        padding: 68px 20px;
+        padding: 120px 20px;
     }
 
     /* TEXT CONTAINER */ /* TEXT CONTAINER */
@@ -79,6 +98,16 @@ header-section{
     /* IMAGE CONTAINER */ /* IMAGE CONTAINER */
     .header__text__container{
         width: 50%;
+    }
+    
+}
+
+
+@media (min-width: 1200px){
+
+    header-section{
+        flex-direction: row;
+        padding: 200px 20px;
     }
     
 }
