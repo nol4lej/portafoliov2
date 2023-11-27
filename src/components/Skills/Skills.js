@@ -14,6 +14,7 @@ class SkillsSection extends HTMLElement{
         this.render()
         this.openSkill()
         this.handleSlider()
+        this.recalculateSize()
     }
 
     render(){
@@ -78,46 +79,39 @@ class SkillsSection extends HTMLElement{
 
         nextButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex + 1) % this.getTypes().length;
-            this.renderContent(this.getTypes()[this.currentIndex]);
-
-            this.getCurrentSlider()
-            this.updateActiveButton();
+            this.buttonAction()
         });
 
         prevButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex - 1 + this.getTypes().length) % this.getTypes().length;
-            this.renderContent(this.getTypes()[this.currentIndex]);
-
-            this.getCurrentSlider()
-            this.updateActiveButton();
+            this.buttonAction()
         });
+    }
 
-        window.addEventListener('resize', recalculateSizes);
+    buttonAction(){
+        this.renderContent(this.getTypes()[this.currentIndex]); // 1.- renderizo contenido actual
+        this.getCurrentSlider() // 2.- obtiene el slide actual y lo desplaza a la vista
+        this.updateActiveButton(); // 3.- añade la clase "active" al botón actual
     }
 
     getCurrentSlider(){
-        // Obtiene el slide actual y lo desplaza a la vista
         const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
         currentSlide.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     updateActiveButton(){
-        // Añade la clase "active" al botón correspondiente
         const buttons = this.querySelectorAll("li[data-type-list]");
         buttons.forEach((btn, index) => {
             btn.querySelector("p").classList.toggle("active", index === this.currentIndex);
-        })
-    }
+        });
+    };
 
-    recalculateSizes(){
-        if(window.innerWidth < 768){
-            this.getCurrentSlider()
-        }
+    recalculateSize(){
+        const handler = () => window.innerWidth < 768 && this.getCurrentSlider()
+        window.addEventListener('resize', handler);
     }
 
     
-
-
 
 
       
