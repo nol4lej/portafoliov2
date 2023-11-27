@@ -73,60 +73,53 @@ class SkillsSection extends HTMLElement{
     }
 
     handleSlider() {
-        const slidesContainer = this.querySelector("#typeList");
-        const slide = this.querySelector("li[data-type-list]");
         const prevButton = this.querySelector("#prev-btn");
         const nextButton = this.querySelector("#next-btn");
-      
-        const recalculateSizes = () => {
-            const slideWidth = slide.clientWidth // obtengo el ancho de cada slide
-            const containerWidth = slidesContainer.clientWidth; //  obtengo el ancho del contenedor de los slides
-            const initialScroll = Math.floor((slideWidth / 2) - (containerWidth / 2)); // calcula cuanto debe desplazarse el contenido del contenedo
-        
-            slidesContainer.scrollLeft = initialScroll;
-            this.renderContent(this.currentIndex); // cuando se ejecuta el evento resize, mantengo el contenido del navtab seleccionado
-        };
-      
-        // Recalcular los tamaños al cargar la página y al cambiar el tamaño de la ventana
-        window.addEventListener('load', recalculateSizes);
-        window.addEventListener('resize', recalculateSizes);
-        
-        const updateActiveButton = () => {
-            // Añade la clase "active" al botón correspondiente
-            const buttons = this.querySelectorAll("li[data-type-list]");
-            buttons.forEach((btn, index) => {
-                btn.querySelector("p").classList.toggle("active", index === this.currentIndex);
-            });
-            
-        };
-      
+
         nextButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex + 1) % this.getTypes().length;
             this.renderContent(this.getTypes()[this.currentIndex]);
-        
-            // Obtiene el slide actual
-            const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
-            
-            // Hace que el slide actual esté centrado en el contenedor
-            currentSlide.scrollIntoView({ behavior: "smooth", block: "center" });
-        
-            updateActiveButton();
+
+            this.getCurrentSlider()
+            this.updateActiveButton();
         });
-        
+
         prevButton.addEventListener("click", () => {
             this.currentIndex = (this.currentIndex - 1 + this.getTypes().length) % this.getTypes().length;
             this.renderContent(this.getTypes()[this.currentIndex]);
-        
-            // Obtiene el slide actual
-            const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
-            
-            // Hace que el slide actual esté centrado en el contenedor
-            currentSlide.scrollIntoView({ behavior: "smooth", block: "center" });
-        
-            updateActiveButton();
+
+            this.getCurrentSlider()
+            this.updateActiveButton();
         });
-        
+
+        window.addEventListener('resize', recalculateSizes);
     }
+
+    getCurrentSlider(){
+        // Obtiene el slide actual y lo desplaza a la vista
+        const currentSlide = this.querySelector(`li[data-type-list]:nth-child(${this.currentIndex + 1})`);
+        currentSlide.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    updateActiveButton(){
+        // Añade la clase "active" al botón correspondiente
+        const buttons = this.querySelectorAll("li[data-type-list]");
+        buttons.forEach((btn, index) => {
+            btn.querySelector("p").classList.toggle("active", index === this.currentIndex);
+        })
+    }
+
+    recalculateSizes(){
+        if(window.innerWidth < 768){
+            this.getCurrentSlider()
+        }
+    }
+
+    
+
+
+
+
       
     
 }

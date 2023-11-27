@@ -13,8 +13,8 @@ import git from "../../assets/git.svg";
 import aws from "../../assets/aws.svg";
 
 const skills = {
-    Frontend: {
-        text : "esto es frontend",
+    "Frontend": {
+        text : "Single Page Applications (SPA) - Web components",
         detail: [
             {
                 title: "HTML",
@@ -46,7 +46,7 @@ const skills = {
             }
         ]
     },
-    Backend: {
+    "Backend": {
         text : "esto es backend",
         detail: [
             {
