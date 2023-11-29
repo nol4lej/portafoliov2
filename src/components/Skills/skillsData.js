@@ -11,6 +11,7 @@ import sqlserver from "../../assets/sqlserver.svg";
 import mysql from "../../assets/mysql.svg";
 import git from "../../assets/git.svg";
 import aws from "../../assets/aws.svg";
+import postman from "../../assets/postman.svg"
 
 const skills = {
     "Frontend": {
@@ -64,6 +65,10 @@ const skills = {
             {
                 title: "Firebase",
                 img: firebase,
+            },
+            {
+                title: "Postman",
+                img: postman,
             }
         ]
     },
