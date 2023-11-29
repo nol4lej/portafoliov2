@@ -1,6 +1,6 @@
 projects-section{
     display: grid;
-
+    padding-top: 100px;
 }
 
 projects-section > h2{
@@ -8,17 +8,88 @@ projects-section > h2{
 }
 
 .projects__card__container{
-    display: grid;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     color: var(--text-white);
+}
+
+.project__card__img__container{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .project__card__img__container > img{
     height: 200px;
-    width: 100%;
+    max-width: 100%;
 }
 
 .project__card__info__container{
     display: grid;
     gap: 5px;
+}
+
+.project__card__tech__container{
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.project__card__tech__container > span{
+    height: max-content;
+    background-color: var(--color-purple);
+    padding: 2px 5px;
+    border-radius: 8px;
+}
+
+.project_card__buttons__container{
+    display: flex;
+    gap: 10px;
+}
+
+.project_card__buttons__container > a {
+    background-color: #18161c;
+    color: var(--text-white);
+    padding: 10px 16px;
+    border-radius: 8px;
+    display: flex;
+    width: max-content;
+    border: 1px solid transparent;
+}
+
+.project_card__buttons__container > a:hover{
+    border: 1px solid var(--container-border-grey);
+    transition: border .3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+
+    projects-section{
+        padding: 60px;
+    }
+
+}
+
+@media (min-width: 998px) {
+
+    projects-section{
+        /* padding: 60px 200px; */
+    }
+
+    .projects__card__container{
+        flex-direction: row;
+    }
+
+    .project__card__img__container > img{
+        max-width: fit-content;
+    }
+
+    .project_card__buttons__container{
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+    }
+
 }
