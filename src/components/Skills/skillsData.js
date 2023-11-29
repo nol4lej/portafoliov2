@@ -13,6 +13,7 @@ import git from "../../assets/git.svg";
 import aws from "../../assets/aws.svg";
 import postman from "../../assets/postman.svg"
 
+
 const skills = {
     "Frontend": {
         text : "Single Page Applications (SPA) - Web components",
