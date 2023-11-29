@@ -1,5 +1,6 @@
 .fade-in {
     animation: fade-in 0.3s linear;
+    display: grid;
 }
 
 @keyframes fade-in {
